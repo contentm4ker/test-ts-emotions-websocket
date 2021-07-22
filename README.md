@@ -7,7 +7,7 @@ Below is a list of all the scripts this template has available:
 | Npm Script | Description  |
 | ------------------------- | ------------------------------------------------------------------------------------------------- |
 | `build-ts`                | Compiles all source `.ts` files to `.js` files in the `dist` folder                               |
-| `build`                   | Full build. Runs ALL build tasks (`build-sass`, `build-ts`, `lint`, `copy-static-assets`)         |
+| `build`                   | Full build. Runs ALL build tasks (`build-ts`, `lint`)         |
 | `debug`                   | Performs a full build and then serves the app in watch mode                                       |
 | `lint`                    | Runs ESLint on project files                                                                      |
 | `serve-debug`             | Runs the app with the --inspect flag                                                              |
@@ -16,7 +16,7 @@ Below is a list of all the scripts this template has available:
 | `watch-debug`             | The same as `watch` but includes the --inspect flag so you can attach a debugger                  |
 | `watch-node`              | Runs node with nodemon so the process restarts if it crashes. Used in the main watch task         |
 | `watch-ts`                | Same as `build-ts` but continuously watches `.ts` files and re-compiles when needed               |
-| `watch`                   | Runs all watch tasks (TypeScript, Sass, Node). Use this if you're not touching static assets.     |
+| `watch`                   | Runs all watch tasks (TypeScript, Node). Use this if you're not touching static assets.     |
 
 ## Dependencies
 Dependencies are managed through `package.json`.
@@ -45,6 +45,8 @@ Dependencies are managed through `package.json`.
 To install or update these dependencies you can use `npm install` or `npm update`.
 
 ## Environment
+
+Environment vars are managed through `.env` if exists (`.env.example` instead).
 
 | Var                             | Description                                                           |
 | ------------------------------- | --------------------------------------------------------------------- |
