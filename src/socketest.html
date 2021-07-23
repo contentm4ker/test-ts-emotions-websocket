@@ -68,7 +68,7 @@
     const $events = document.getElementById('events');
 
     $(function () {
-      const socket = io('/', { path: '/socket.io' });
+      const socket = io('/', { path: '/socket.io', transports: ['websocket'] });
 
       $('form').submit(function (e) {
         e.preventDefault();

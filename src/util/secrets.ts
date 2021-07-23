@@ -12,6 +12,22 @@ if (fs.existsSync(".env")) {
 
 export const ENVIRONMENT = process.env.NODE_ENV;
 
+export const REDIS_ADAPTER_HOST = process.env.REDIS_ADAPTER_HOST;
+if (!REDIS_ADAPTER_HOST) {
+    logger.error("Missing REDIS_ADAPTER_HOST. Set REDIS_ADAPTER_HOST environment variable.");
+    process.exit(1);
+}
+
+export const REDIS_ADAPTER_PORT = Number(process.env.REDIS_ADAPTER_PORT);
+if (!process.env.REDIS_ADAPTER_PORT) {
+    logger.error("Missing REDIS_ADAPTER_PORT. Set REDIS_ADAPTER_PORT environment variable.");
+    process.exit(1);
+}
+if (!REDIS_ADAPTER_PORT) {
+    logger.error("REDIS_ADAPTER_PORT environment variable must be integer");
+    process.exit(1);
+}
+
 export const EMOTION_ID_LOWER = Number(process.env.EMOTION_ID_LOWER);
 if (!process.env.EMOTION_ID_LOWER) {
     logger.error("Missing EMOTION_ID_LOWER. Set EMOTION_ID_LOWER environment variable.");
