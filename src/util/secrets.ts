@@ -12,18 +12,24 @@ if (fs.existsSync(".env")) {
 
 export const ENVIRONMENT = process.env.NODE_ENV;
 
+export const REDIS_ADAPTER_ENABLE = process.env.REDIS_ADAPTER_ENABLE === "true";
+if (!process.env.REDIS_ADAPTER_ENABLE) {
+    logger.error("Missing REDIS_ADAPTER_ENABLE. Set REDIS_ADAPTER_ENABLE environment variable (true or false).");
+    process.exit(1);
+}
+
 export const REDIS_ADAPTER_HOST = process.env.REDIS_ADAPTER_HOST;
-if (!REDIS_ADAPTER_HOST) {
+if (REDIS_ADAPTER_ENABLE && !REDIS_ADAPTER_HOST) {
     logger.error("Missing REDIS_ADAPTER_HOST. Set REDIS_ADAPTER_HOST environment variable.");
     process.exit(1);
 }
 
 export const REDIS_ADAPTER_PORT = Number(process.env.REDIS_ADAPTER_PORT);
-if (!process.env.REDIS_ADAPTER_PORT) {
+if (REDIS_ADAPTER_ENABLE && !process.env.REDIS_ADAPTER_PORT) {
     logger.error("Missing REDIS_ADAPTER_PORT. Set REDIS_ADAPTER_PORT environment variable.");
     process.exit(1);
 }
-if (!REDIS_ADAPTER_PORT) {
+if (REDIS_ADAPTER_ENABLE && !REDIS_ADAPTER_PORT) {
     logger.error("REDIS_ADAPTER_PORT environment variable must be integer");
     process.exit(1);
 }

@@ -9,6 +9,7 @@ import logger from "./util/logger";
 import {
     EMOTION_ID_LOWER,
     EMOTION_ID_UPPER,
+    REDIS_ADAPTER_ENABLE,
     REDIS_ADAPTER_HOST,
     REDIS_ADAPTER_PORT
 } from "./util/secrets";
@@ -20,10 +21,12 @@ export default function injectSocket(server: Server): SocketServer {
     allowEIO3: true
   });
 
-  // Adapter for scaling to multiple Socket.IO servers (instead of memory adapter)
-  const pubClient = createClient({ host: REDIS_ADAPTER_HOST, port: REDIS_ADAPTER_PORT });
-  const subClient = pubClient.duplicate();
-  socketIO.adapter(createAdapter(pubClient, subClient));
+  if (REDIS_ADAPTER_ENABLE) {
+    // Adapter for scaling to multiple Socket.IO servers (instead of memory adapter)
+    const pubClient = createClient({ host: REDIS_ADAPTER_HOST, port: REDIS_ADAPTER_PORT });
+    const subClient = pubClient.duplicate();
+    socketIO.adapter(createAdapter(pubClient, subClient));
+  }
 
   socketIO.on("connection", (socket) => {
       socket.on("emotion", (emotionId: number) => {
