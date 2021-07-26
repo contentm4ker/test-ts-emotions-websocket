@@ -1,0 +1,20 @@
+config:
+  target: "http://localhost:3000/"
+  phases:
+    - duration: 300
+      arrivalRate: 15
+  socketio:
+    transports: ["websocket"]
+
+scenarios:
+  - name: "Send emotion, wait, disconnect"
+    engine: "socketio"
+    flow:
+      - emit:
+          channel: "emotion"
+          data: 5
+      - think: 20
+      - emit:
+          channel: "emotion"
+          data: 8
+      - think: 30
