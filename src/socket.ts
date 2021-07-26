@@ -16,7 +16,8 @@ import {
 export default function injectSocket(server: Server): SocketServer {
   const socketIO = new SocketServer(server, {
     path: `${baseUrl}/socket.io`,
-    transports: ["websocket"]
+    transports: ["websocket"],
+    allowEIO3: true
   });
 
   // Adapter for scaling to multiple Socket.IO servers (instead of memory adapter)
